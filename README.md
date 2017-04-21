@@ -4,7 +4,7 @@ platforms: .Net
 author: jianghaolu
 ---
 
-#Getting Started with App - Manage Web App Storage Account Connection - in .Net #
+# Getting Started with App - Manage Web App Storage Account Connection - in .Net #
 
           Azure App Service basic sample for managing web apps.
            - Create a storage account and upload a couple blobs
