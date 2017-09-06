@@ -1,4 +1,0 @@
-C:\Sources\dotnet-samples\app-service-dotnet-manage-storage-connections-for-web-apps\bin\Debug\net452\ManageWebAppStorageAccountConnection.runtimeconfig.json
-C:\Sources\dotnet-samples\app-service-dotnet-manage-storage-connections-for-web-apps\bin\Debug\net452\ManageWebAppStorageAccountConnection.runtimeconfig.dev.json
-C:\Sources\dotnet-samples\app-service-dotnet-manage-storage-connections-for-web-apps\obj\Debug\net452\ManageWebAppStorageAccountConnection.csproj.ManageWebAppStorageAccountConnection.exe.config
-C:\Sources\dotnet-samples\app-service-dotnet-manage-storage-connections-for-web-apps\obj\Debug\net452\ManageWebAppStorageAccountConnection.csproj.CoreCompileInputs.cache

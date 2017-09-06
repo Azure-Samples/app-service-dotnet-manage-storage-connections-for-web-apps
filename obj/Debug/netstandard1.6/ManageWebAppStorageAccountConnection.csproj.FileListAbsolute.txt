@@ -1,2 +1,0 @@
-C:\Sources\dotnet-samples\app-service-dotnet-manage-storage-connections-for-web-apps\bin\Debug\netstandard1.6\ManageWebAppStorageAccountConnection.deps.json
-C:\Sources\dotnet-samples\app-service-dotnet-manage-storage-connections-for-web-apps\obj\Debug\netstandard1.6\ManageWebAppStorageAccountConnection.csproj.CoreCompileInputs.cache
