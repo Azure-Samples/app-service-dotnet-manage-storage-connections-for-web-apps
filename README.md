@@ -1,10 +1,10 @@
 ---
-services: App
-platforms: .Net
+services: App-Service
+platforms: dotnet
 author: jianghaolu
 ---
 
-# Getting Started with App - Manage Web App Storage Account Connection - in .Net #
+# Getting started on managing storage connections for Web Apps in C# #
 
           Azure App Service basic sample for managing web apps.
            - Create a storage account and upload a couple blobs
@@ -17,7 +17,7 @@ author: jianghaolu
 
 To run this sample:
 
-Set the environment variable `AZURE_AUTH_LOCATION` with the full path for an auth file. See [how to create an auth file](https://github.com/Azure/azure-sdk-for-net/blob/Fluent/AUTH.md).
+Set the environment variable `AZURE_AUTH_LOCATION` with the full path for an auth file. See [how to create an auth file](https://github.com/Azure/azure-libraries-for-java/blob/master/AUTH.md).
 
     git clone https://github.com/Azure-Samples/app-service-dotnet-manage-storage-connections-for-web-apps.git
 
