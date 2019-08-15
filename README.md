@@ -4,18 +4,18 @@ languages:
 - csharp
 products:
 - azure
-services: App-Service
-platforms: dotnet
-author: yaohaizh
+extensions:
+- services: App-Service
+- platforms: dotnet
 ---
 
 # Getting started on managing storage connections for Web Apps in C# #
 
-          Azure App Service basic sample for managing web apps.
-           - Create a storage account and upload a couple blobs
-           - Create a web app that contains the connection string to the storage account
-           - Deploy a Tomcat application that reads from the storage account
-           - Clean up
+ Azure App Service basic sample for managing web apps.
+  - Create a storage account and upload a couple blobs
+  - Create a web app that contains the connection string to the storage account
+  - Deploy a Tomcat application that reads from the storage account
+  - Clean up
 
 
 ## Running this Sample ##
