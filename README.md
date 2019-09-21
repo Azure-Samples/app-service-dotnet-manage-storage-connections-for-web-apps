@@ -7,6 +7,7 @@ products:
 extensions:
 - services: App-Service
 - platforms: dotnet
+description: "Azure App Service basic sample for managing web apps."
 ---
 
 # Getting started on managing storage connections for Web Apps in C# #
