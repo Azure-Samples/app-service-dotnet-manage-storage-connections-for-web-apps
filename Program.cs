@@ -36,12 +36,12 @@ namespace ManageWebAppStorageAccountConnection
         public static async Task RunSample(ArmClient client)
         {
             AzureLocation region = AzureLocation.EastUS;
-            string App1Name = Utilities.CreateRandomName("webapp1-");
-            string App1Url = App1Name + SUFFIX;
-            string StorageName = Utilities.CreateRandomName("jsdkstore");
-            string ContainerName = Utilities.CreateRandomName("jcontainer");
-            string ResourceGroupName = Utilities.CreateRandomName("rg1NEMV_");
-            var lro = await client.GetDefaultSubscription().GetResourceGroups().CreateOrUpdateAsync(Azure.WaitUntil.Completed, ResourceGroupName, new ResourceGroupData(AzureLocation.EastUS));
+            string app1Name = Utilities.CreateRandomName("webapp1-");
+            string app1Url = app1Name + SUFFIX;
+            string storageName = Utilities.CreateRandomName("jsdkstore");
+            string containerName = Utilities.CreateRandomName("jcontainer");
+            string resourceGroupName = Utilities.CreateRandomName("rg1NEMV_");
+            var lro = await client.GetDefaultSubscription().GetResourceGroups().CreateOrUpdateAsync(Azure.WaitUntil.Completed, resourceGroupName, new ResourceGroupData(AzureLocation.EastUS));
             var resourceGroup = lro.Value;
 
             try
@@ -49,24 +49,24 @@ namespace ManageWebAppStorageAccountConnection
                 //============================================================
                 // Create a storage account for the web app to use
 
-                Utilities.Log("Creating storage account " + StorageName + "...");
+                Utilities.Log("Creating storage account " + storageName + "...");
 
                 var accountCollection = resourceGroup.GetStorageAccounts();
                 var accountData = new StorageAccountCreateOrUpdateContent(new StorageSku("sku"), StorageKind.Storage, region);
-                var account_lro = await  accountCollection.CreateOrUpdateAsync(WaitUntil.Completed, StorageName, accountData);
+                var account_lro = await  accountCollection.CreateOrUpdateAsync(WaitUntil.Completed, storageName, accountData);
                 var account = account_lro.Value;
 
                 var accountKey = account.GetKeys().FirstOrDefault().Value;
 
                 var connectionString = $"DefaultEndpointsProtocol=https;AccountName={account.Data.Name};AccountKey={accountKey}";
-                var blobClient = new BlobContainerClient(connectionString, ContainerName);
+                var blobClient = new BlobContainerClient(connectionString, containerName);
 
                 Utilities.Log("Created storage account " + account.Data.Name);
 
                 //============================================================
                 // Upload a few files to the storage account blobs
 
-                Utilities.Log("Uploading 2 blobs to container " + ContainerName + "...");
+                Utilities.Log("Uploading 2 blobs to container " + containerName + "...");
                 
                 await Utilities.UploadFromFileAsync(
                     blobClient,
@@ -76,12 +76,12 @@ namespace ManageWebAppStorageAccountConnection
                         Path.Combine(Utilities.ProjectPath, "Asset", "install_apache.Sh")
                     });
 
-                Utilities.Log("Uploaded 2 blobs to container " + ContainerName);
+                Utilities.Log("Uploaded 2 blobs to container " + containerName);
 
                 //============================================================
                 // Create a web app with a new app service plan
 
-                Utilities.Log("Creating web app " + App1Name + "...");
+                Utilities.Log("Creating web app " + app1Name + "...");
 
                 var webSiteCollection = resourceGroup.GetWebSites();
                 var webSiteData = new WebSiteData(region)
@@ -94,7 +94,7 @@ namespace ManageWebAppStorageAccountConnection
                     },
 
                 };
-                var webSite_lro = await webSiteCollection.CreateOrUpdateAsync(Azure.WaitUntil.Completed, App1Name, webSiteData);
+                var webSite_lro = await webSiteCollection.CreateOrUpdateAsync(Azure.WaitUntil.Completed, app1Name, webSiteData);
                 var webSite = webSite_lro.Value;
 
                 Utilities.Log("Created web app " + webSite.Data.Name);
@@ -104,7 +104,7 @@ namespace ManageWebAppStorageAccountConnection
                 // Deploy a web app that connects to the storage account
                 // Source code: https://github.Com/jianghaolu/azure-samples-blob-explorer
 
-                Utilities.Log("Deploying azure-samples-blob-traverser.war to " + App1Name + " through FTP...");
+                Utilities.Log("Deploying azure-samples-blob-traverser.war to " + app1Name + " through FTP...");
 
                 var csm = new CsmPublishingProfile()
                 {
@@ -118,19 +118,19 @@ namespace ManageWebAppStorageAccountConnection
                 Utilities.Print(webSite);
 
                 // warm up
-                Utilities.Log("Warming up " + App1Url + "/azure-samples-blob-traverser...");
-                Utilities.CheckAddress("http://" + App1Url + "/azure-samples-blob-traverser");
+                Utilities.Log("Warming up " + app1Url + "/azure-samples-blob-traverser...");
+                Utilities.CheckAddress("http://" + app1Url + "/azure-samples-blob-traverser");
                 Thread.Sleep(5000);
-                Utilities.Log("CURLing " + App1Url + "/azure-samples-blob-traverser...");
-                Utilities.Log(Utilities.CheckAddress("http://" + App1Url + "/azure-samples-blob-traverser"));
+                Utilities.Log("CURLing " + app1Url + "/azure-samples-blob-traverser...");
+                Utilities.Log(Utilities.CheckAddress("http://" + app1Url + "/azure-samples-blob-traverser"));
             }
             finally
             {
                 try
                 {
-                    Utilities.Log("Deleting Resource Group: " + ResourceGroupName);
+                    Utilities.Log("Deleting Resource Group: " + resourceGroupName);
                     await resourceGroup.DeleteAsync(WaitUntil.Completed);
-                    Utilities.Log("Deleted Resource Group: " + ResourceGroupName);
+                    Utilities.Log("Deleted Resource Group: " + resourceGroupName);
                 }
                 catch (NullReferenceException)
                 {
